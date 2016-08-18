@@ -28,7 +28,6 @@ typedef enum : NSUInteger {
     kHTTPResponseType,
     kJSONResponseType,
     
-    
 } EResponseDataType;
 
 /**

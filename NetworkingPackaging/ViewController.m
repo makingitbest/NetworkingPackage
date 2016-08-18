@@ -58,11 +58,12 @@ typedef enum : NSUInteger {
         NSData *imageData          = UIImageJPEGRepresentation([UIImage imageNamed:@"17700521"], 1);
         NSLog(@"upload image size: %ld k", (long)(imageData.length / 1024));
         
-        UploadImageInformationObject *infoObject = [UploadImageInformationObject uploadImageInformationObjectWithData:imageData name:@"file"
-                                                                                                             fileName:fileName mimeType:@"image/png"];
+        UploadImageInformationObject *infoObject = [UploadImageInformationObject uploadImageInformationObjectWithData:imageData
+                                                                                                                 name:@"file"
+                                                                                                             fileName:fileName
+                                                                                                             mimeType:@"image/png"];
         self.uploadOneNetworking.imageObjects    = @[infoObject];
         [self.uploadOneNetworking startRequest];
-        
     }
     
     {
@@ -73,9 +74,11 @@ typedef enum : NSUInteger {
         NSData *imageData          = UIImageJPEGRepresentation([UIImage imageNamed:@"17700521"], 1);
         NSLog(@"upload image size: %ld k", (long)(imageData.length / 1024));
         
-        UploadImageInformationObject *infoObject = [UploadImageInformationObject uploadImageInformationObjectWithData:imageData name:@"file"
-                                                                                                             fileName:fileName mimeType:@"image/png"];
-        self.uploadTwoNetworking.imageObjects    = @[infoObject];
+        UploadImageInformationObject *infoObject = [UploadImageInformationObject uploadImageInformationObjectWithData:imageData
+                                                                                                                 name:@"file"
+                                                                                                             fileName:fileName
+                                                                                                             mimeType:@"image/png"];
+        self.uploadTwoNetworking.imageObjects = @[infoObject];
         
         self.uploadTwoNetworking = [Networking uploadPicturesWithUrlString:@"http://101.201.78.24/api/user/update"
                                                           requestParameter:@{@"auth_token"          : @"MTksODE2NTk=",
@@ -114,8 +117,6 @@ typedef enum : NSUInteger {
                                                  responseDataType:kHTTPResponseType
                                                     requestMethod:kPOSTMethodType];
         self.postNetworking.tag = kPostRequestTag;
-        
-        
         [self.postNetworking startRequest];
     }
 }
@@ -173,7 +174,6 @@ typedef enum : NSUInteger {
     [self.uploadTwoNetworking cancleRequest];
     [self.getNetworking       cancleRequest];
     [self.postNetworking      cancleRequest];
-    
 }
 
 @end
