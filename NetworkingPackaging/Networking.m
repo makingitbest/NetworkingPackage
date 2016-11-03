@@ -24,7 +24,7 @@
         
         self.session  = [AFHTTPSessionManager manager];
         
-        self.session.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"text/html",@"text/plain",@"application/json"]];
+//        self.session.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"text/html",@"text/plain",@"application/json"]];
     }
     
     return self;
@@ -61,6 +61,13 @@
         
         self.session.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
+    
+    
+    self.session.responseSerializer.acceptableContentTypes = [NSSet setWithArray:@[@"text/html",@"text/plain",@"application/json"]];
+    
+    NSLog(@"\n--------------------------------------\n[%@]\n%@\n%@\n--------------------------------------\n",
+          self.networkInfomation.length ? self.networkInfomation : @"Not set the networkInfomation",
+          self.urlString, self.parameters);
     
     if (self.requestMethod == kGETMethodType) {
         

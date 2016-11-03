@@ -68,6 +68,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) id <NetworkingDelegate> delegate;
 
 /**
+ *  请求描述
+ */
+@property (nonatomic, strong) NSString *networkInfomation;
+
+/**
  *  网址
  */
 @property (nonatomic, strong) NSString *urlString;

@@ -45,12 +45,13 @@ typedef enum : NSUInteger {
                                                   @"followScopes"        : @"18,14,10,6",
                                                   @"nickname"            : @"Lady-Wang",
                                                   @"realname"            : @"王同学"};
-        self.uploadOneNetworking.requestBodyType  = kHTTPBodyType;
-        self.uploadOneNetworking.responseDataType = kHTTPResponseType;
-        self.uploadOneNetworking.requestMethod    = kUpLoadMethodType;
-        self.uploadOneNetworking.delegate         = self;
-        self.uploadOneNetworking.tag              = kUploadRequestTypeOneTag;
-        
+        self.uploadOneNetworking.requestBodyType   = kHTTPBodyType;
+        self.uploadOneNetworking.responseDataType  = kJSONResponseType;
+        self.uploadOneNetworking.requestMethod     = kUpLoadMethodType;
+        self.uploadOneNetworking.delegate          = self;
+        self.uploadOneNetworking.tag               = kUploadRequestTypeOneTag;
+        self.uploadOneNetworking.networkInfomation = @"上传图片数据的第一种请求";
+
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat       = @"yyyyMMddHHmmss";
         NSString *imageName        = [formatter stringFromDate:[NSDate date]];
@@ -92,8 +93,8 @@ typedef enum : NSUInteger {
                                                               imageObjects:@[infoObject]
                                                                   delegate:self
                                                                requestBody:kHTTPBodyType
-                                                          responseDataType:kHTTPResponseType];
-        
+                                                          responseDataType:kJSONResponseType];
+        self.uploadTwoNetworking.networkInfomation = @"上传图片数据的第二种请求";
         self.uploadTwoNetworking.tag = kUploadRequestTypeTwoTag;
         [self.uploadTwoNetworking startRequest];
     }
@@ -105,7 +106,8 @@ typedef enum : NSUInteger {
                                                      requestBody:kHTTPBodyType
                                                 responseDataType:kJSONResponseType
                                                    requestMethod:kGETMethodType];
-        self.getNetworking.tag = kGetRequestTag;
+        self.getNetworking.networkInfomation = @"get 请求";
+        self.getNetworking.tag               = kGetRequestTag;
         [self.getNetworking startRequest];
     }
     
@@ -114,9 +116,10 @@ typedef enum : NSUInteger {
                                                  requestParameter:nil
                                                          delegate:self
                                                       requestBody:kHTTPBodyType
-                                                 responseDataType:kHTTPResponseType
+                                                 responseDataType:kJSONResponseType
                                                     requestMethod:kPOSTMethodType];
-        self.postNetworking.tag = kPostRequestTag;
+        self.postNetworking.networkInfomation = @"post 请求";
+        self.postNetworking.tag               = kPostRequestTag;
         [self.postNetworking startRequest];
     }
 }
@@ -126,24 +129,21 @@ typedef enum : NSUInteger {
     if (networking.tag == kGetRequestTag) {
         
         NSLog(@"GET请求成功");
-        NSLog(@"GET请求成功 data= %@",data);
+        NSLog(@"GET请求成功\n data = %@",data);
         
     }  else if (networking.tag == kPostRequestTag) {
         
         NSLog(@"POST请求成功");
-        NSLog(@"POST请求成功 data= %@",data);
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"POST请求成功 dic = %@",dic);
+        NSLog(@"POST请求成功 data是字典 \n： data= %@",data);
         
     }else if (networking.tag  == kUploadRequestTypeOneTag) {
         
-        NSLog(@"上传图片相关信息的第一种方法成功 data= %@",data);
+        NSLog(@"上传图片相关信息的第一种方法成功\n data= %@",data);
         
     } else if (networking.tag == kUploadRequestTypeTwoTag) {
         
-        NSLog(@"上传图片相关信息的第二种方法成功 data= %@",data);
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        NSLog(@"上传图片相关信息的第二种方法成功 dic = %@",dic);
+        NSLog(@"上传图片相关信息的第二种方法成功\n data= %@",data);
+        
     }
 }
 
@@ -152,19 +152,19 @@ typedef enum : NSUInteger {
     
     if (networking.tag == kGetRequestTag) {
         
-        NSLog(@"GET请求error = %@",error);
+        NSLog(@"\nGET请求\n error = %@",error);
         
     }  else if (networking.tag == kPostRequestTag) {
         
-        NSLog(@"POST请求error = %@",error);
+        NSLog(@"\nPOST请求\n error = %@",error);
         
     }else if (networking.tag  == kUploadRequestTypeOneTag) {
         
-        NSLog(@"上传图片相关信息的第一种方法error = %@",error);
+        NSLog(@"\n上传图片相关信息的第一种方法error = %@",error);
         
     } else if (networking.tag == kUploadRequestTypeTwoTag) {
         
-        NSLog(@"上传图片相关信息的第二种方法error = %@",error);
+        NSLog(@"\n上传图片相关信息的第二种方法error = %@",error);
     }
 }
 
